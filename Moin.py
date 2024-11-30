@@ -13,8 +13,8 @@ users_collection = db['PAID']
 
 # Bot Configuration
 TELEGRAM_BOT_TOKEN = '7542386978:AAE6sDxkQqMozKslX-tW9gcYZlbXTvSAYkU'
-ADMIN_USER_ID =   # Replace with your admin user ID
-ADMIN_USERNAME = '7209762563'  # Replace with your admin's Telegram username (without @)
+ADMIN_USER_ID = 7209762563 # Replace with your admin user ID
+ADMIN_USERNAME = 'MoinOwner'  # Replace with your admin's Telegram username (without @)
 
 # Customizable messages
 OWNER_NAME = '@Vip_Ddos_07'  # Change this to the owner's name
