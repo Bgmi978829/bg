@@ -1,0 +1,10 @@
+{
+  "name": "NS3 Dev Environment",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "extensions": ["ms-vscode.cpptools"],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  }
+}
