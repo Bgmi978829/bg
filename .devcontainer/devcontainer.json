@@ -1,10 +1,17 @@
 {
-  "name": "NS3 Dev Environment",
-  "build": {
-    "dockerfile": "Dockerfile"
+  "name": "C Programming Environment",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-20.04",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:1": {},
+    "ghcr.io/devcontainers/features/cmake:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:1": {}
   },
-  "extensions": ["ms-vscode.cpptools"],
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools"
+      ]
+    }
   }
 }
