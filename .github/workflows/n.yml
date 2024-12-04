@@ -1,0 +1,44 @@
+name: C++ Build and Test
+
+# Define the trigger event(s) for the workflow
+on:
+  push:
+    branches:
+      - main    # This triggers the workflow on push to the 'main' branch
+  pull_request:
+    branches:
+      - main    # This triggers the workflow on pull requests targeting the 'main' branch
+
+# Job definitions
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Runs the job on the latest Ubuntu runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up C++ build environment
+        uses: actions/setup-cpp@v1
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential
+
+      - name: Build the project
+        run: make  # Replace with your actual build command
+
+      - name: Run tests
+        run: make test  # Replace with your actual test command
+
+      # Expose ports for testing (only TCP in GitHub Actions)
+      - name: Expose port for testing
+        run: |
+          echo "Testing network connectivity on port 12345"
+          # Start a TCP listener on port 12345 (UDP would be restricted)
+          nc -l 12345 &
+          sleep 2  # Wait for the listener to start
+
+      - name: Send test data to port 12345
+        run: |
+          # Send test message to the TCP listener
+          echo "Test message" | nc -w1 127.0.0.1 12345
