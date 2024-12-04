@@ -1,0 +1,43 @@
+# devcontainer.yml
+
+name: "C++ Development with UDP and Network Access"
+
+version: "2"
+settings:
+  terminal.integrated.shell.linux: "/bin/bash"  # Set default shell to bash
+
+extensions:
+  - ms-vscode.cpptools  # C++ extensions for VS Code
+  - ms-vscode.vscode-icons  # Optional: Adds file icons for VS Code (enhanced file management)
+
+# Forward ports from the container to your local machine (or external access)
+forwardPorts:
+  - 12345  # Example UDP port, you can add more ports as necessary
+  # Add additional ports to forward if needed
+
+# Arguments passed when the container is created
+runArgs:
+  - "--network"
+  - "host"  # Share the host's network stack to expose UDP traffic and ports
+
+# Command to run after container creation
+postCreateCommand: |
+  echo "DevContainer setup complete!"
+  # Install basic build tools, dependencies, and useful utilities
+  sudo apt-get update
+  sudo apt-get install -y build-essential  # Install build essentials for C++
+  sudo apt-get install -y libboost-all-dev  # Install Boost (common C++ library)
+  sudo apt-get install -y netcat  # Install netcat for testing network connections
+
+# Optional: Use a custom Dockerfile for further customization of the container environment
+# dockerFile: ./Dockerfile
+
+# Optional: Commands to run after the container starts
+postStartCommand: |
+  echo "Container started successfully!"
+  # Additional setup commands can go here
+  # Test UDP availability with netcat
+  echo "Testing UDP Port 12345 with netcat"
+  nc -u -l 12345 &
+  sleep 2  # Wait for netcat to start listening
+  echo -n "Test UDP message" | nc -u -w1 127.0.0.1 12345
