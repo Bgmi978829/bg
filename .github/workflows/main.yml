@@ -1,0 +1,36 @@
+# devcontainer.yml
+
+name: "C++ Development with UDP Support"
+
+version: "2"
+settings:
+  terminal.integrated.shell.linux: "/bin/bash"  # Use bash as default terminal shell
+
+extensions:
+  - ms-vscode.cpptools   # Install the C++ extension for better coding support
+  - ms-vscode.vscode-icons  # (Optional) Icons for better file management
+
+# List of ports to expose externally from the Codespace container
+forwardPorts:
+  - 12345  # Example UDP port to expose, you can add more ports as needed
+
+# Configuration to allow all UDP traffic (tries to use the host network stack)
+runArgs:
+  - "--network"
+  - "host"  # Share the host's network stack to attempt to expose all UDP traffic
+
+postCreateCommand: |
+  echo "DevContainer is set up and ready!"
+  # Example of installing any dependencies (e.g., build tools, libraries, etc.)
+  sudo apt-get update
+  sudo apt-get install -y build-essential
+  sudo apt-get install -y libboost-all-dev
+  sudo apt-get install -y netcat  # For testing UDP connections
+
+# Optional: Dockerfile setup for more customization
+# dockerFile: ./Dockerfile
+
+# If you need to install additional tools or packages during the creation of the container
+# postStartCommand: |
+#   # Commands to execute after the container starts, e.g., install software
+#   echo "Container started!"  
