@@ -1,12 +1,22 @@
 #!/bin/bash
 
-# Ensure root privileges and setup vscode user
-apt-get update && apt-get install -y sudo
+# Update and install necessary tools for raw sockets
+apt-get update && apt-get install -y \
+    build-essential \
+    gcc \
+    g++ \
+    cmake \
+    libpcap-dev \
+    iputils-ping \
+    sudo
 
-# Set password for vscode user
-echo "vscode:bgmi" | chpasswd
+# Add user permissions for raw sockets
+echo "Configuring user permissions for raw sockets..."
+groupadd rawsocket || true
+usermod -aG rawsocket vscode
 
-# Add vscode user to sudo group
-usermod -aG sudo vscode
+# Verify capabilities
+echo "Checking NET_ADMIN capabilities:"
+getcap /bin/ping || echo "ping does not have NET_ADMIN capability."
 
-echo "User setup complete. Ready to work."
+echo "Setup complete. Ready for raw socket operations."
