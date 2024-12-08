@@ -1,8 +1,8 @@
 {
-  "name": "Custom Codespace",
+  "name": "Raw Socket Codespace",
   "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
   "workspaceFolder": "/workspace",
-  "remoteUser": "vscode",
+  "remoteUser": "root",
   "runArgs": [
     "--network=host",
     "--cap-add=NET_ADMIN",
