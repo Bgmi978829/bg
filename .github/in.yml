@@ -1,0 +1,55 @@
+version: '3'
+services:
+  dev:
+    image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
+    volumes:
+      - ..:/workspace:cached
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - seccomp:unconfined
+
+    # Install dependencies and libraries
+    init: true
+    entrypoint: /bin/bash -c "
+      apt-get update && apt-get install -y \
+      build-essential \
+      cmake \
+      gdb \
+      libssl-dev \
+      libpcap-dev \
+      python3-pip \
+      curl \
+      wget \
+      git && \
+      pip3 install --no-cache-dir telebot flask aiogram pymongo && \
+      chmod +x * && \
+      echo 'Container setup completed. Ready for execution.'
+    "
+
+vscode:
+  extensions:
+    - ms-vscode.cpptools
+    - ms-vscode.cmake-tools
+    - ms-python.python
+
+settings:
+  terminal.integrated.shell.linux: /bin/bash
+
+remoteUser: vscode
+
+workspaceFolder: /workspace
+
+mounts:
+  - source: /var/run/docker.sock
+    target: /var/run/docker.sock
+    type: bind
+
+features:
+  - docker-in-docker
+  - docker-from-docker
+
+postCreateCommand: |
+  echo "Starting Moin.py script..." &&
+  python3 Moin.py
