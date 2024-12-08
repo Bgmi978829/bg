@@ -1,20 +1,19 @@
 {
-  "name": "GitHub Codespace",
-  "image": "mcr.microsoft.com/vscode/devcontainers/python:latest", 
-  "features": {
-    "git": "latest",
-    "node": "latest"
+  "name": "UDP Flood Attack",
+  "build": {
+    "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "pip install -r requirements.txt", 
-  "mounts": [
-    "source=${localWorkspaceFolder}/data,target=/workspace/data,type=bind"
-  ],
   "settings": {
-    "editor.formatOnSave": true,
-    "python.pythonPath": "/usr/local/bin/python"
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "terminal.integrated.shellArgs.linux": ["-c"]
   },
   "extensions": [
-    "ms-python.python",
-    "dbaeumer.vscode-eslint"
+    "ms-python.python"  // Keep if needed for additional scripts or debugging
+  ],
+  "forwardPorts": [
+    {
+      "protocol": "udp",
+      "port": 80
+    }
   ]
-} 
+}
