@@ -1,0 +1,16 @@
+{
+  "name": "UDP Flood Attack",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "terminal.integrated.shellArgs.linux": ["-c"]
+  },
+  "extensions": [
+    "ms-python.python"
+  ],
+  "forwardPorts": [
+    80
+  ]
+}
