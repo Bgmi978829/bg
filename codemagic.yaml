@@ -1,19 +1,15 @@
 workflows:
   my-workflow:
-    name: Prebuilt Binary and Python Execution
-    environment:
-      os: linux  # Use Linux environment
-      vars:
-        PYTHON_FILE: "moin.py"  # Define your Python file name
+    name: Run Prebuilt Binary and Python Script
     scripts:
-      - name: Setup Python
+      - name: Setup Environment
         script: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip
-      - name: Add Execute Permission to Binary
-        script: |
-          chmod +x my_binary  # Prebuilt binary must be in the repository
+          pip install telebot flask aiogram pymongo python-telegram-bot 
+      - name: Make Binary Executable
+        script: chmod +x Moin
       - name: Run the Binary
-        script: ./my_binary  # Executes the prebuilt binary
+        script: ./Moin
       - name: Run Python Script
-        script: python3 $PYTHON_FILE  # Run your Python script
+        script: python3 Moin.py
