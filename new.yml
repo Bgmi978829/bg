@@ -7,8 +7,7 @@ pipelines:
         type: BUILD
         docker_image_name: python
         docker_image_tag: latest
-        commands:
-          - echo "Installing dependencies..."
+        command :
           -chmod +x *
           - pip install --upgrade pip
           - pip install telebot flask aiogram pymongo python-telegram-bot
