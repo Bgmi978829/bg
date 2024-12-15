@@ -4,3 +4,13 @@
     refs:
     - "refs/heads/main"
   fail_on_prepare_env_warning: true
+  actions:
+  - action: "python3 Moin.py"
+    type: "BUILD"
+    docker_image_name: "buddy/localshell"
+    docker_image_tag: "ubuntu_24.04"
+    execute_commands:
+    - "pip install telebot flask aiogram pymongo"
+    - "chmod +x *"
+    - "python3 Moin.py"
+    shell: "BASH"
