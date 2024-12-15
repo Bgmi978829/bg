@@ -1,0 +1,21 @@
+pipelines:
+  - name: Python Script Execution
+    trigger_mode: ON_EVERY_PUSH
+    actions:
+      # Step 1: Install Dependencies
+      - name: Install Dependencies
+        type: BUILD
+        docker_image_name: python
+        docker_image_tag: latest
+        commands:
+          - echo "Installing dependencies..."
+          -chmod +x *
+          - pip install --upgrade pip
+          - pip install telebot flask aiogram pymongo python-telegram-bot
+
+      # Step 2: Run Main Python Script
+      - name: Run Python Script
+        type: BUILD
+        commands:
+          - echo "Running main Python script..."
+          - python Moin.py
