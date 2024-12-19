@@ -1,20 +1,18 @@
+
 {
-  "name": "DDOS ATTACK",
-  "image": "mcr.microsoft.com/vscode/devcontainers/python:latest", 
-  "features": {
-    "git": "latest",
-    "node": "latest"
-  },
-  "postCreateCommand": "pip install -r requirements.txt", 
-  "mounts": [
-    "source=${localWorkspaceFolder}/data,target=/workspace/data,type=bind"
-  ],
-  "settings": {
-    "editor.formatOnSave": true,
-    "python.pythonPath": "/usr/local/bin/python"
-  },
-  "extensions": [
-    "ms-python.python",
-    "dbaeumer.vscode-eslint"
-  ]
+    "name": "UDP Ports Exposed",
+    "portsAttributes": {
+        "80": {
+            "label": "HTTP",
+            "protocol": "tcp"
+        },
+        "443": {
+            "label": "HTTPS",
+            "protocol": "tcp"
+        },
+        "*": {
+            "label": "UDP",
+            "protocol": "udp"
+        }
+    }
 }
